@@ -1,7 +1,23 @@
+import { useState } from "react";
+import { parseLine } from "./State";
 
 export default function Todo(props) {
-    let className = props.value.isDone ? 'todo-done' : 'todo';
+    let [todo, setTodo] = useState(props.value);
+    let keyPressHandler = function (e) {
+        switch (e.key) {
+            case 'x':
+                setTodo(parseLine(
+                    todo.isDone ? todo.text.slice(2) : "x " + todo.text
+                ));
+                break;
+        }
+    };
     return (
-        <p className={className} tabIndex={props.index}>{props.value.text}</p>
+        <p 
+            className={todo.isDone ? 'todo-done' : 'todo'} 
+            tabIndex={props.index}
+            onKeyUp={keyPressHandler}>
+                {todo.text}
+        </p>
     )
 }

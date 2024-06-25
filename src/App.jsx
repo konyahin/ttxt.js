@@ -1,26 +1,21 @@
-import Todo from './Todo';
+import TodoList from './TodoList';
+import { parseLine } from './State';
 
 let lines = [
   "make todo app +ttxt",
   "read book about react +maybe @home",
-  "x make app template +ttxt",
+  "x use app template +ttxt",
+  "scroll for tasks",
+  "search",
+  "j and k for selection",
+  "create task from search by Shif + Enter",
 ];
-
-function parseLine(line) {
-  return {
-    id: crypto.randomUUID(),
-    text: line,
-    isDone: line.startsWith("x ")
-  };
-}
 
 export default function App() {
   let todos = lines.map(parseLine)
-    .map((todo, id) => <Todo key={todo.id} index={id +2} value={todo}/>)
   return (
     <>
-      <input id='search' tabIndex={1}/>
-      {todos}
+      <TodoList todos={todos} />
     </>
   )
 }
