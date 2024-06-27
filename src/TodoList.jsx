@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Todo from "./Todo"
+import TodoView from "./TodoView"
 
 export default function TodoList({todos}) {
     let [filter, setFilter] = useState("")
@@ -7,7 +7,7 @@ export default function TodoList({todos}) {
     let children = todos
         .filter(todo => todo.text.includes(filter))
         .map((todo, id) => 
-        <Todo key={todo.id} index={id +2} value={todo}/>)
+            <TodoView key={todo.id} index={id + 2} value={todo}/>)
         
     return (
         <>

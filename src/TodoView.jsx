@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { parseLine } from "./State";
+import { Todo } from "./Todo";
 
-export default function Todo(props) {
+export default function TodoView(props) {
     let [todo, setTodo] = useState(props.value);
     let keyPressHandler = function (e) {
         switch (e.key) {
             case 'x':
-                setTodo(parseLine(
-                    todo.isDone ? todo.text.slice(2) : "x " + todo.text
-                ));
+                todo.toggleDoneState();
+                // TODO do it right
+                setTodo(new Todo(todo.text));
                 break;
         }
     };
+
     return (
         <p 
             className={todo.isDone ? 'todo-done' : 'todo'} 
@@ -19,5 +20,5 @@ export default function Todo(props) {
             onKeyUp={keyPressHandler}>
                 {todo.text}
         </p>
-    )
+    );
 }
